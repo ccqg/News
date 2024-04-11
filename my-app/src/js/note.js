@@ -1,3 +1,19 @@
+// import{
+//   doLogout,
+// } from "./main";
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const btn_logout = document.getElementById("btn_logout");
+
+//   btn_logout.addEventListener("click", function() {
+//     alert("Logout successfully");
+//   });
+// });
+
+
+
+
+
 const notes = JSON.parse(localStorage.getItem("notes-app") || "[]");
 const search = document.querySelector(".search-input");
 const form = document.getElementById("form");
