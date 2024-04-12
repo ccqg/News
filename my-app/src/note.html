@@ -11,13 +11,16 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&display=swap"
       rel="stylesheet"
     />
+    
     <link rel="stylesheet" href="./css/profile.css" />
     <link rel="stylesheet" href="./css/note.css" />
     <link rel="stylesheet" href="./css/sidebar.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
+    
     />
+  
   </head>
   <body>
     <div class="sidebar">
@@ -66,11 +69,12 @@
           <span class="tooltip">Settings</span>
         </li>
         <li>
-          <a href="#">
+          <a type="button" id="btn_logout" href="#">
             <i class="bx bx-log-out"></i>
             <span class="nav-item">Logout</span>
           </a>
           <span class="tooltip">Logout</span>
+          
         </li>
       </ul>
     </div>
@@ -143,7 +147,9 @@
         sidebar.classList.toggle("active");
       };
     </script>
-    <script src="./js/note.js"></script>
+    <script  src="./js/note.js"></script>
     <script src="./js/auth/profile.js"></script>
+  <!--   <script type="module" src="./js/main.js"></script> -->
+    
   </body>
 </html>

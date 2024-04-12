@@ -5,13 +5,17 @@ import "../scss/styles.scss";
 import * as bootstrap from "bootstrap";
 // Show the wrapper after the page has fully loaded
 
+import { setROuter } from "./router/router";
+
 import { createClient } from "@supabase/supabase-js";
 
+setROuter();
+
 const supabase = createClient(
-  "https://wtstajjtiaocfyttavbm.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0c3Rhamp0aWFvY2Z5dHRhdmJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk3NjcxMzksImV4cCI6MjAyNTM0MzEzOX0.O0EVGa9iUgkNNtQR03T4yn9qfo3-vNnHuaj2gegKdDU"
+  "https://jdrbeyywzehkravlqofg.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpkcmJleXl3emVoa3Jhdmxxb2ZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTI4NDQxNDcsImV4cCI6MjAyODQyMDE0N30.tMjBasfWAavOMjQhhx4gOVIp-Yu6fXu-u2etsXXnZOM"
 );
-export { supabase };
+
 
 window.addEventListener("load", function () {
   var loader = document.querySelector(".loader");
@@ -34,3 +38,25 @@ document
       window.location.href = "register.html"; // Redirect to register form
     }, 300); // Adjust the loading time as needed (in milliseconds)
   });
+
+
+  async function doLogout() {
+    // Supabase Logout
+    let { error } = await supabase.auth.signOut();
+
+    if (error == null) {
+      successNotification("Logout Successfully!");
+  
+      // Clear local Storage
+      localStorage.clear();
+  
+      // Redirect to login page
+      window.location.pathname = "/index.html";
+    } else {
+      errorNotification("Logout Failed!", 15);
+    }
+  }
+
+
+
+  export { supabase,doLogout };

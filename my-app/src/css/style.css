@@ -10,11 +10,7 @@ body {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgb(18, 23, 30), rgb(18, 23, 30)),
-    /* Background color */
-      url("C:\Users\Dongs\Desktop\Application\my-app\src\assets\imgs\asdasd.jpg")
-      no-repeat; /* Background image */
-  background-size: cover;
+  background: linear-gradient(rgb(18, 23, 30), rgb(18, 23, 30));
 }
 
 .container {
