@@ -1,26 +1,24 @@
-function setROuter(){
-    const path= window.location.pathname;
-    const isLoggedIn = localStorage.getItem("access_token") !== null;
-    switch(path){
-        case "/":
-        case "index.html":
-        case "register.html":
+function setRouter() {
+  const path = window.location.pathname;
+  const isLoggedIn = localStorage.getItem("access_token") !== null;
+  switch (path) {
+    case "/":
+    case "index.html":
+    case "register.html":
+      if (isLoggedIn) {
+        window.location.pathname = "/note.html"; // default page when logged in
+      }
+      break;
 
-        if (isLoggedIn) {
-            window.location.pathname = "/note.html"; // default page when logged in
-          }
-          break;
-        
-        case "/note.html":
-        
-        if (!isLoggedIn) {
-            window.location.pathname = "/index.html";
-        }
-          break;
+    case "/note.html":
+      if (!isLoggedIn) {
+        window.location.pathname = "/index.html";
+      }
+      break;
 
-        default:
-            break;
-    }
+    default:
+      break;
+  }
 }
 
-export {setROuter}
+export { setRouter };

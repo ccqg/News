@@ -19,16 +19,30 @@
       src="https://unpkg.com/@ionic/pwa-elements@latest/dist/ionicpwaelements/ionicpwaelements.js"
     ></script>
 
-    <link rel="icon" type="image/x-icon" href="./assets/icon/s2.ico" />
+    <link rel="icon" type="image/x-icon" href="./assets/icon/009.jpg" />
     <link rel="manifest" href="./manifest.json" />
-    <link rel="stylesheet" href="./css/loader.css" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/register.css" />
+    <link rel="stylesheet" href="./scss/loader.scss" />
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/auth/register.js"></script>
     <meta name="theme-color" content="#31d53d" />
   </head>
-  <body>
-    
+  <body class="indexbody">
+    <!-- Loader -->
+    <div id="preloader">
+      <div class="bookshelf_wrapper">
+        <ul class="books_list">
+          <li class="book_item first"></li>
+          <li class="book_item second"></li>
+          <li class="book_item third"></li>
+          <li class="book_item fourth"></li>
+          <li class="book_item fifth"></li>
+          <li class="book_item sixth"></li>
+        </ul>
+        <div class="shelf"></div>
+      </div>
+    </div>
+    <!-- End of Loader -->
     <div class="container mt-5">
       <h1 class="form-title">Registration</h1>
       <form id="form_register">
@@ -111,5 +125,11 @@
         </div>
       </form>
     </div>
+    <script>
+      var loader = document.getElementById("preloader");
+      window.addEventListener("load", function () {
+        loader.style.display = "none";
+      });
+    </script>
   </body>
 </html>
