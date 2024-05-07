@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat with AI</title>
+    <script type="module" src="./js/main.js"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="icon" type="image/x-icon" href="./assets/icon/009.jpg" />
+    <link rel="stylesheet" href="./css/AI.css" />
+    <link rel="stylesheet" href="scss/loader.scss" />
+  </head>
+  <body class="profilebody">
+    <!-- Loader -->
+    <div id="preloader">
+      <div class="bookshelf_wrapper">
+        <ul class="books_list">
+          <li class="book_item first"></li>
+          <li class="book_item second"></li>
+          <li class="book_item third"></li>
+          <li class="book_item fourth"></li>
+          <li class="book_item fifth"></li>
+          <li class="book_item sixth"></li>
+        </ul>
+        <div class="shelf"></div>
+      </div>
+    </div>
+    <!-- End of Loader -->
+    <div class="h1">
+      <h1>Chat with Smart AI</h1>
+    </div>
+
+    <div class="chatbox-wrapper">
+      <div class="message-box">
+        <div class="chat response">
+          <img src="./assets/icon/chatgpt-icon.png" />
+          <span
+            >Hello There! <br />
+            How can I help you today?
+          </span>
+        </div>
+      </div>
+      <div class="messagebar">
+        <div class="bar-wrapper">
+          <input type="text" placeholder="Enter Message here" />
+          <button>
+            <span class="material-symbols-outlined"> send </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      var loader = document.getElementById("preloader");
+      window.addEventListener("load", function () {
+        loader.style.display = "none";
+      });
+    </script>
+    <script src="./js/ai.js"></script>
+  </body>
+</html>
