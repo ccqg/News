@@ -7,7 +7,11 @@ const userId = localStorage.getItem("user_id");
 console.log(userId);
 
 getPicture();
+viewEdit();
+getName();
 let for_update_id = "";
+
+//edit or upload image
 change_image.onsubmit = async (e) => {
     e.preventDefault();
     // Disable Button
@@ -99,8 +103,37 @@ change_image.onsubmit = async (e) => {
  
   };
 
+  async function getName() {
+    try {
+      // Fetch user information
+      let { data: profiles, error: userError } = await supabase
+        .from("user_information")
+        .select("*")
+        .eq("id", userId);
 
+      //ge declare ug empty para makahimo ug dynamic nga output
+     
+      let container = "";
+     
+  
+      profiles.forEach((user_info) => {
+        //Dynamic Navbar para mag baylo2 base sa ga log-in na user
+        container += `
+        <h1 class="bot form-title">${user_info.username}</h1>
+      
+          `;
 
+      });
+  
+  
+      document.getElementById("nameContainer").innerHTML = container;
+    } catch (error) {
+    console(error.message);
+    }
+   
+  }
+
+//show profice picture FUnction
   async function getPicture() {
     try {
       // Fetch user information
@@ -135,13 +168,7 @@ itemsImageUrl + user_info.image_path
       
       });
   
-      // Assuming you have a container in your HTML with an id, for example, "userContainer"
-      // initialize ug container
-     /*  document.body.addEventListener("click", function (event) {
-        if (event.target.id === "btn_deleteQuestions") {
-          deleteQuestion(event);
-        }
-      }); */
+     
   
       document.getElementById("userContainer").innerHTML = container;
     } catch (error) {
@@ -149,4 +176,39 @@ itemsImageUrl + user_info.image_path
     }
    
   }
+
+  async function viewEdit() {
+    // Supabase show by id
+    let { data: profiles, error } = await supabase
+      .from("user_information")
+      .select("*")
+      .eq("id", userId)
+      .single(); // Assuming you only expect one result
+    
+    if (error == null) {
+      // Store id to a variable; id will be utilized for update
+      for_update_id = profiles.id;
+  
+      // Assign values to the form
+      document.getElementById("username").value = profiles.username;
+      document.getElementById("full_name").value = profiles.full_name;
+      document.getElementById("birthdate").value = profiles.birthdate;
+      document.getElementById("phone_number").value = profiles.phone_number;
+    
+      // Change Button Text using textContent; either innerHTML or textContent is fine here
+    } else {
+      errorNotification("Something wrong happened. Cannot show item.", 15);
+      console.log(error);
+    }
+  }
+
+   // Assuming you have a container in your HTML with an id, for example, "userContainer"
+      // initialize ug container
+      document.body.addEventListener("click", function (event) {
+        if (event.target.id === "btn_save") {
+         alert("Work in Progress")
+        }
+      });
+  
+  
 
