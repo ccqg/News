@@ -20,6 +20,7 @@ const form = async (e) => {
   const formData = new FormData(form_note);
   const { data, error } = await supabase.from("note").insert([
     {
+      userId: userId,
       title: formData.get("title"),
       description: formData.get("description"),
     },
@@ -33,7 +34,7 @@ const form = async (e) => {
 };
 
 async function getDatas() {
-  let { data: notes, error } = await supabase.from("note").select("*");
+  let { data: notes, error } = await supabase.from("note").select("*").eq("user_id", userId);
 
   let container = "";
   notes.forEach((datas) => {
