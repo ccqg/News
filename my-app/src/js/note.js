@@ -1,11 +1,22 @@
 import { doLogout, supabase } from "./main";
 
+const form_search = document.getElementById('form_search');
+
 const userId = localStorage.getItem("user_id");
 document.body.addEventListener("click", function (event) {
   if (event.target.id === "btn_save") {
     form(event);
   }
 });
+
+form_search.onsubmit = async (e) => {
+  e.preventDefault();
+  
+  const formData = new FormData(form_search);
+  getDatas(formData.get("keyword"))
+  document.getElementById("modal_close_search").click();
+  form_search.reset();
+}
 
 document
   .getElementById("btn_logout")
@@ -33,21 +44,110 @@ const form = async (e) => {
   }
 };
 
-async function getDatas() {
-  let { data: notes, error } = await supabase
-    .from("note")
-    .select("*")
-    .eq("user_id", userId);
+
+async function getDatas(keyword = "") {
+  let { data: notes, error } = await supabase.from("note").select("*").eq("user_id", userId) .or(
+    "description.ilike.%" +
+        keyword +
+        "%, title.ilike.%" +
+        keyword +
+        "%"
+  );;
+
 
   let container = "";
   notes.forEach((datas) => {
     container += `<div class=" card w-100 mb-3 shadow">
-    <div id="card_color" class="card-body rounded">
+    <div id="card_color" class="card-body rounded"  >
       <h5 class="card-title">${datas.title}</h5>
       <p class="card-text">${datas.description}</p>
+      <div class="d-flex justify-content-end">
+      <button type="button" data-bs-toggle="modal"
+      data-bs-target="#form_modal" id="btn_view" data-id="${datas.id}"  class="me-2 btn btn-light">view</button>
+      <button type="button" id="btn_delete" data-id="${datas.id}"  class="btn btn-light">Delete</button></div>
     </div>
-  </div>`;
+  </div>
+  
+  <div class="modal fade" tabindex="-1" id="form_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Note History</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>CONTAINER HERE!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+       
+      </div>
+    </div>
+  </div>
+</div>
+  
+  `;
   });
 
   document.getElementById("noteContainer").innerHTML = container;
 }
+
+document.body.addEventListener("click", function (event) {
+  if (event.target.id === "btn_delete") {
+    deleteNote(event);
+  }
+});
+
+const deleteNote = async (e) => {
+  const id = e.target.getAttribute("data-id");
+  console.log(id);
+  
+  const isConfirmed = window.confirm(
+    "Are you sure you want to delete Note?"
+  );
+
+  // Check if the user has confirmed the deletion
+  if (!isConfirmed) {
+    return; // Abort the operation if the user cancels
+  }
+
+  try {
+    const { error } = await supabase.from("note").delete().eq("id", id);
+    Toastify({
+      text: "question deleted successfully",
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      className: "centered-toast",
+      onClick: function(){} // Callback after click
+    }).showToast();
+    
+    // Delay reload by 3 seconds (3000 milliseconds)
+    setTimeout(function() {
+      window.location.reload();
+    }, 1500);
+    
+  } catch (error) {
+    errorNotification("Something wrong happened. Cannot delete item.", 15);
+    Toastify({
+      text: `Error: ${error.message}`,
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: "top", // `top` or `bottom`
+      position: "center", // `left`, `center` or `right`
+      stopOnFocus: true, // Prevents dismissing of toast on hover
+      className: "centered-toast",
+      onClick: function(){} // Callback after click
+    }).showToast();
+
+    setTimeout(function() {
+      window.location.reload();
+    }, 1500);
+   
+  }
+};

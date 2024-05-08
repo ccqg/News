@@ -7,13 +7,14 @@
     <title>My Notes</title>
     <script type="module" src="./js/note.js"></script>
     <script type="module" src="./js/main.js"></script>
-    <script type="module" src="./js/auth/profile.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300;8..144,400;8..144,500;8..144,600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/icon/009.jpg" />
 
     <link rel="stylesheet" href="./css/note.css" />
@@ -67,6 +68,16 @@
           </a>
           <span class="tooltip">Dashboard</span>
         </li> -->
+        
+        <li>
+          <a id="search" data-bs-toggle="modal"
+          data-bs-target="#modal_search">
+            <i class='bx bx-search text-light' ></i>
+            <span class="nav-item">Search</span>
+          </a>
+          <span class="tooltip">Search</span>
+        </li>
+
         <li>
           <a href="profile.html">
             <i class="bx bx-child"></i>
@@ -84,12 +95,21 @@
         </li>
 
         <li>
+          <a id="reset" href="./note.html">
+          <i class='bx bx-reset text-light'></i>
+            <span class="nav-item">reset</span>
+          </a>
+          <span class="tooltip">reset</span>
+        </li>
+
+        <li>
           <a type="button" id="btn_logout" href="#">
             <i class="bx bx-log-out"></i>
             <span class="nav-item">Logout</span>
           </a>
           <span class="tooltip">Logout</span>
         </li>
+
       </ul>
     </div>
 
@@ -175,6 +195,34 @@
       </div>
     </div>
     <!-- end of modal -->
+
+
+
+   <!--  search modal -->
+   <form id="form_search">
+   <div class="modal fade" tabindex="-1" id="modal_search">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Search Bar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating mb-3 mx-2">
+            <input name="keyword" type="text" id="floatingPass" class="form-control" 
+            placeholder="Input title or descreption." aria-label="Search" required>
+              <label  id="labelleft"> <i class='bx bx-search' ></i> Input title or descreption.</label>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="modal_close_search" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit"  class="btn btn-primary" >Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+  <!--  end of search modal -->
     <script>
       let btn = document.querySelector("#btn");
       let sidebar = document.querySelector(".sidebar");
@@ -188,6 +236,7 @@
         loader.style.display = "none";
       });
     </script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <!--   <script type="module" src="./js/main.js"></script> -->
   </body>

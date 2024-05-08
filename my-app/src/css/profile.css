@@ -33,15 +33,7 @@
 .profilebody {
   background-color: #12171e;
 }
-#profile {
-  width: 150px; /* Adjust width as needed */
-  height: 150px; /* Set height to match width for a perfect circle */
-  z-index: 1; /* Ensure the image stays behind other elements */
-  color: #12171e;
-  border-radius: 50%;
-  border: 2px solid #fff; /* Add solid border with color #fff */
-  margin-bottom: 5vh;
-}
+
 .bot {
   background-color: #12171e;
   text-align: center;
