@@ -1,6 +1,6 @@
 import { doLogout, supabase } from "./main";
 
-const form_search = document.getElementById('form_search');
+const form_search = document.getElementById("form_search");
 
 const userId = localStorage.getItem("user_id");
 document.body.addEventListener("click", function (event) {
@@ -11,12 +11,12 @@ document.body.addEventListener("click", function (event) {
 
 form_search.onsubmit = async (e) => {
   e.preventDefault();
-  
+
   const formData = new FormData(form_search);
-  getDatas(formData.get("keyword"))
+  getDatas(formData.get("keyword"));
   document.getElementById("modal_close_search").click();
   form_search.reset();
-}
+};
 
 document
   .getElementById("btn_logout")
@@ -46,13 +46,11 @@ const form = async (e) => {
 
 
 async function getDatas(keyword = "") {
-  let { data: notes, error } = await supabase.from("note").select("*").eq("user_id", userId) .or(
-    "description.ilike.%" +
-        keyword +
-        "%, title.ilike.%" +
-        keyword +
-        "%"
-  );;
+  let { data: notes, error } = await supabase
+    .from("note")
+    .select("*")
+    .eq("user_id", userId)
+    .or("description.ilike.%" + keyword + "%, title.ilike.%" + keyword + "%");
 
 
   let container = "";
@@ -61,11 +59,16 @@ async function getDatas(keyword = "") {
     <div id="card_color" class="card-body rounded"  >
       <h5 class="card-title">${datas.title}</h5>
       <p class="card-text">${datas.description}</p>
-      <div class="d-flex justify-content-end">
-      <button type="button" data-bs-toggle="modal"
-      data-bs-target="#form_modal" id="btn_view" data-id="${datas.id}"  class="me-2 btn btn-light">view</button>
-      <button type="button" id="btn_delete" data-id="${datas.id}"  class="btn btn-light">Delete</button></div>
+     
+  <div class="row text-end">
+  <div class="col-md-6 col-sm-6 text-sm-end "></div>
+    <div class="col-md-6 col-sm-6 text-sm-end  mb-2 "> <!-- Adjust the column size based on your needs -->
+      <button type="button" data-bs-toggle="modal" data-bs-target="#form_modal" id="btn_view" data-id="${datas.id}" class="btn btn-light me-md-2 my-1">View</button>
+      <button type="button" id="btn_delete" data-id="${datas.id}" class="btn btn-light my-1">Delete</button>
     </div>
+ 
+</div>
+
   </div>
   
   <div class="modal fade" tabindex="-1" id="form_modal">
@@ -102,10 +105,8 @@ document.body.addEventListener("click", function (event) {
 const deleteNote = async (e) => {
   const id = e.target.getAttribute("data-id");
   console.log(id);
-  
-  const isConfirmed = window.confirm(
-    "Are you sure you want to delete Note?"
-  );
+
+  const isConfirmed = window.confirm("Are you sure you want to delete Note?");
 
   // Check if the user has confirmed the deletion
   if (!isConfirmed) {
@@ -115,22 +116,24 @@ const deleteNote = async (e) => {
   try {
     const { error } = await supabase.from("note").delete().eq("id", id);
     Toastify({
-      text: "question deleted successfully",
+      text: "Note deleted successfully",
       duration: 3000,
       newWindow: true,
       close: true,
       gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
+      position: "right", // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       className: "centered-toast",
-      onClick: function(){} // Callback after click
+      style: {
+        background: "linear-gradient(to right, #12171e, #12171e)",
+      },
+      onClick: function () {}, // Callback after click
     }).showToast();
-    
+
     // Delay reload by 3 seconds (3000 milliseconds)
-    setTimeout(function() {
+    setTimeout(function () {
       window.location.reload();
     }, 1500);
-    
   } catch (error) {
     errorNotification("Something wrong happened. Cannot delete item.", 15);
     Toastify({
@@ -139,15 +142,17 @@ const deleteNote = async (e) => {
       newWindow: true,
       close: true,
       gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
+      position: "right", // `left`, `center` or `right`
       stopOnFocus: true, // Prevents dismissing of toast on hover
       className: "centered-toast",
-      onClick: function(){} // Callback after click
+      style: {
+        background: "linear-gradient(to right, #12171e, #12171e)",
+      },
+      onClick: function () {}, // Callback after click
     }).showToast();
 
-    setTimeout(function() {
+    setTimeout(function () {
       window.location.reload();
     }, 1500);
-   
   }
 };

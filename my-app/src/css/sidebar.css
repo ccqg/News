@@ -26,6 +26,10 @@
 .sidebar.active ~ .main-content {
   left: 250px;
   width: calc(100% - 250px);
+
+  opacity: 0;
+  background-color: #0c0c0c;
+
 }
 
 .sidebar.active {
@@ -152,4 +156,9 @@
   transition: all 0.5s ease;
   width: calc(100% - 80px);
   padding: 1rem;
+}
+
+
+#btn_view {
+  left: 90%;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/profile.css" />
-    <link rel="stylesheet" href="scss/loader.scss" />
+    <link rel="stylesheet" href="./scss/loader.scss" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -31,16 +31,21 @@
     <div class="container">
       <div class="col- sm center">
 
-        <a class="btn btn-dark" href="note.html" role="button">Back</a>
-       <div id="nameContainer" ></div>
+        <a type="button" id="btn_logout" href="note.html">
+          <i style="color: gray; font-size: 40px" class="bx bx-arrow-back"></i>
+        </a>
+        <div id="nameContainer"></div>
+
+
        
+       
+
 
       </div>
       <div class="col-sm d-flex justify-content-center mt-3">
         <div id="userContainer"></div>
       </div>
       <div class="col-sm upload text-center">
-
         <div class="card" style="width: 16rem">
           <div class="card-body">
             <form id="change_image" action="/action_page.php">
@@ -54,12 +59,11 @@
               />
 
               <div class="d-grid gap-2 mt-2">
-                <button type="submit" class="btn btn-dark">submit image</button>
+                <button type="submit" class="btn btn-dark">Submit Image</button>
               </div>
             </form>
           </div>
         </div>
-
       </div>
 
       <div class="row">
@@ -114,7 +118,7 @@
 
         <div class="d-flex justify-content-center">
           <button
-            id="btn_save" 
+            id="btn_save"
             type="button"
             class="btn btn-secondary mb-5"
             data-toggle="modal"
