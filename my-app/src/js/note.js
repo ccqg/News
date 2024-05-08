@@ -55,7 +55,7 @@ async function getDatas(keyword = "") {
 
   let container = "";
   notes.forEach((datas) => {
-    container += `<div class=" card w-100 mb-3 shadow">
+    container += `<div class="mt-2"><div class=" card w-100">
     <div id="card_color" class="card-body rounded"  >
       <h5 class="card-title">${datas.title}</h5>
       <p class="card-text">${datas.description}</p>
@@ -89,7 +89,7 @@ async function getDatas(keyword = "") {
     </div>
   </div>
 </div>
-  
+</div>
   `;
   });
 
