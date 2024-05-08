@@ -9,24 +9,23 @@
   width: 50px;
   border-radius: 100%;
   border: 1px solid #eee;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 
 .sidebar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  height: 104vh;
+  height: 100vh;
   width: 80px;
   background-color: #12171e;
+  padding: 0.4rem 0.8rem;
   transition: all 0.5s ease;
 }
 
-.sidebar.active ~ #try {
+.sidebar.active ~ .main-content {
   left: 250px;
   width: calc(100% - 250px);
-
-  margin-left: 200px;
 }
 
 .sidebar.active {
@@ -93,7 +92,7 @@
 
 .sidebar ul li {
   position: relative;
-  right: 17px;
+  right: 28px;
   list-style-type: none;
   height: 50px;
   width: 90%;
@@ -143,4 +142,14 @@
 
 .sidebar.active ul li .tooltip {
   display: none;
+}
+.main-content {
+  position: relative;
+  background-color: #eee;
+  min-height: 100vh;
+  top: 0;
+  left: 80px;
+  transition: all 0.5s ease;
+  width: calc(100% - 80px);
+  padding: 1rem;
 }
