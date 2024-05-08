@@ -7,11 +7,13 @@ const userId = localStorage.getItem("user_id");
 console.log(userId);
 
 getPicture();
+
 viewEdit();
 getName();
 let for_update_id = "";
 
 //edit or upload image
+
 change_image.onsubmit = async (e) => {
     e.preventDefault();
     // Disable Button
@@ -103,6 +105,7 @@ change_image.onsubmit = async (e) => {
  
   };
 
+
   async function getName() {
     try {
       // Fetch user information
@@ -134,6 +137,7 @@ change_image.onsubmit = async (e) => {
   }
 
 //show profice picture FUnction
+
   async function getPicture() {
     try {
       // Fetch user information
@@ -168,7 +172,9 @@ itemsImageUrl + user_info.image_path
       
       });
   
+
      
+
   
       document.getElementById("userContainer").innerHTML = container;
     } catch (error) {
@@ -211,4 +217,5 @@ itemsImageUrl + user_info.image_path
       });
   
   
+
 
