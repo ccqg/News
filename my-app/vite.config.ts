@@ -13,6 +13,7 @@ export default defineConfig({
         register: "./src/register.html",
         note: "./src/note.html",
         profile: "./src/profile.html",
+        ai: "./src/AI.html",
       },
     },
   },
