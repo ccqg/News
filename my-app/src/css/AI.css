@@ -17,6 +17,7 @@ body {
   margin-top: 3vh;
   margin-bottom: 3vh;
   color: aliceblue;
+  background-color: #fff;
 }
 
 .chat {
@@ -87,6 +88,15 @@ body {
   overflow-y: auto;
 }
 
-.profilebody {
-  background-color: #33343f;
+
+.profilebody{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #494b59;
+  min-height: 100vh;
 }
+
