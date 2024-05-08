@@ -44,6 +44,7 @@ const form = async (e) => {
   }
 };
 
+
 async function getDatas(keyword = "") {
   let { data: notes, error } = await supabase.from("note").select("*").eq("user_id", userId) .or(
     "description.ilike.%" +
@@ -52,6 +53,7 @@ async function getDatas(keyword = "") {
         keyword +
         "%"
   );;
+
 
   let container = "";
   notes.forEach((datas) => {

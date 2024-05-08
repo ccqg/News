@@ -289,6 +289,6 @@ main {
   color: white;
 }
 
-.main-content {
-  background-color: #eee;
+body .main-content {
+  background-color: #ffffff;
 }
