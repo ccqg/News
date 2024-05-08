@@ -11,9 +11,9 @@ body {
   background-color: #33343f;
 }
 
-.h1 {
+.h1 h1 {
   text-align: center;
-  font-size: small;
+  font-size: x-large;
   margin-top: 3vh;
   margin-bottom: 3vh;
   color: aliceblue;
@@ -85,4 +85,8 @@ body {
 .message-box {
   height: calc(100vh - 11 rem);
   overflow-y: auto;
+}
+
+.profilebody {
+  background-color: #33343f;
 }
