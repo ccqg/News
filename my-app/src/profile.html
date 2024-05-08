@@ -34,12 +34,29 @@
         <h2 class="bot">Christ Charl Gabales</h2>
       </div>
       <div class="col-sm d-flex justify-content-center mt-3">
-        <img src="./assets/imgs/x1.jpg" alt="" id="profile" class="" />
+        <div id="userContainer"></div>
       </div>
       <div class="col-sm upload text-center">
-        <form action="/action_page.php">
-          <input type="file" id="myFile" name="filename" />
+        <div class="card" style="width:16rem;">
+          <div class="card-body">
+            <form id="change_image" action="/action_page.php">
+              <input
+                              class="form-control-sm"
+                              type="file"
+                              name="image_path"
+                              accept="image/*"
+                              id="imageUpload" 
+                              rows="1"
+                            />
+           
+            <div class="d-grid gap-2 mt-2">
+              <button type="submit" class="btn btn-dark">submit image</button>
+          </div>
         </form>
+        </div>
+        
+        </div>
+        
       </div>
 
       <div class="row">
