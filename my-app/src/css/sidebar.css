@@ -29,11 +29,11 @@
 
   opacity: 0;
   background-color: #0c0c0c;
-
 }
 
 .sidebar.active {
   width: 250px;
+  height: 120vh;
 }
 
 .sidebar #btn {
@@ -157,7 +157,6 @@
   width: calc(100% - 80px);
   padding: 1rem;
 }
-
 
 #btn_view {
   left: 90%;
