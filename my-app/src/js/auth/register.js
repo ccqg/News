@@ -42,9 +42,9 @@ form_register.onsubmit = async (e) => {
 
       //if succes registration condition
       if (error == null) {
-        alert("Register Successfully please verify your email");
+        alert("Verification sent, please check your email!");
 
-       window.location.href = "index.html";
+        window.location.href = "index.html";
       } else {
         alert(`Error: ${error.message}`);
       }

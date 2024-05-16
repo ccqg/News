@@ -46,8 +46,7 @@ sendBtn.onclick = function () {
         })
         .catch((error) => {
           const ChatBotResponse = document.querySelector(".response .new");
-          ChatBotResponse.innerHTML =
-            "Oops! There's an error. Please try again!";
+          ChatBotResponse.innerHTML = "Work in progress!";
           ChatBotResponse.classList.remove("new");
         });
     }, 100);
