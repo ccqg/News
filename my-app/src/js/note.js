@@ -41,6 +41,7 @@ const form = async (e) => {
   } else {
     alert("Conversation Added!");
     /* window.location.reload(); */
+
   
   }
 
@@ -61,6 +62,7 @@ if (notesError) {
       window.location.href = "AI.html";
   } else {
     console.log("No notes found for user ID:", userId);
+
   }
 }
 
@@ -102,9 +104,13 @@ async function getDatas(keyword = "") {
       
       <div class="modal fade" tabindex="-1" id="form_modal_${datas.id}">
         <div class="modal-dialog">
-          <div class="modal-content">
+
+        <div class="modal-content" style="background-color: #12171e;">
+
             <div class="modal-header">
-              <h5 class="modal-title">Note History</h5>
+            <h5 class="modal-title" style="color: white;">Note History</h5>
+
+
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -122,6 +128,7 @@ async function getDatas(keyword = "") {
   document.getElementById("noteContainer").innerHTML = container;
 
   // Add event listeners to the "View" buttons to fetch and display note history
+
   document.querySelectorAll('#btn_view').forEach(button => {
     button.addEventListener('click', async function () {
       const noteId = this.getAttribute('data-id');
@@ -134,30 +141,34 @@ async function getDatas(keyword = "") {
 
         let convoContent ="";
 
+
       conversations.forEach((conversation) => {
         convoContent += `
          
-            <div class="card-body">
-              <h6 class="card-title">User: ${conversation.prompt}</h6>
-              
-            </div>
-           
-          </div>
-          <div class="card mb-2">
-          <div class="card-body">
-          <h6 class="card-title">AI: ${conversation.response}</h6>
-          
+
+        <div class="card mb-2">
+        <div class="card-body">
+          <h6 class="card-title">User: ${conversation.prompt}</h6>
         </div>
-        <div>
+      </div>
+      
+      <div class="card mb-2">
+        <div class="card-body">
+          <h6 class="card-title">AI: ${conversation.response}</h6>
+        </div>
+      </div>
+      
+        
         `;
-      })
+      });
+
 
       if (error) {
         console.error("Error fetching conversations:", error);
         return;
       }
 
-      
+
       document.getElementById(convoContainerId).innerHTML = convoContent;
     });
   });
