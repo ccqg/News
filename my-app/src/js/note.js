@@ -1,5 +1,8 @@
 import { doLogout, supabase } from "./main";
 
+const itemsImageUrl =
+  "https://jdrbeyywzehkravlqofg.supabase.co/storage/v1/object/public/profile_picture/";
+
 const form_search = document.getElementById("form_search");
 
 const userId = localStorage.getItem("user_id");
@@ -68,6 +71,29 @@ if (notesError) {
 
 
 };
+
+getPicture();
+
+async function getPicture() {
+    let {data: profile_picture, error} = await supabase
+    .from("user_information")
+    .select("*")
+    .eq("id", userId)
+
+    if (error) {
+        console.error("Error fetching profile picture:", error);
+    }
+
+    let container = "";
+
+    profile_picture.forEach((profile) => {
+        container += `<div data-id="${profile.image_path}" ><img class="block my-2 border border-light border-2 rounded-circle"  src="${itemsImageUrl + profile.image_path}" alt="me"  /></div>`;
+    })
+
+    document.getElementById("image_container").innerHTML = container;
+};
+
+
 
 async function getDatas(keyword = "") {
   let { data: notes, error } = await supabase
