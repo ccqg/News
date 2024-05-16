@@ -112,6 +112,8 @@ async function getName() {
       .select("*")
       .eq("id", userId);
 
+      console.log(userId);
+
     //ge declare ug empty para makahimo ug dynamic nga output
 
     let container = "";
@@ -168,7 +170,7 @@ async function getPicture() {
     console(error.message);
   }
 }
-
+let update_profile = "";
 async function viewEdit() {
   // Supabase show by id
   let { data: profiles, error } = await supabase
@@ -179,7 +181,7 @@ async function viewEdit() {
 
   if (error == null) {
     // Store id to a variable; id will be utilized for update
-    for_update_id = profiles.id;
+    update_profile = profiles.id;
 
     // Assign values to the form
     document.getElementById("username").value = profiles.username;
@@ -198,6 +200,86 @@ async function viewEdit() {
 // initialize ug container
 document.body.addEventListener("click", function (event) {
   if (event.target.id === "btn_save") {
-    alert("Work in Progress");
+   onSubmitHandler(event);
   }
 });
+
+
+
+const onSubmitHandler = async (e) => {
+  e.preventDefault();
+  document.querySelector(
+    "#form_profile button[type='button']"
+  ).disabled = true;
+  document.querySelector(
+    "#form_profile button[type='button']"
+  ).innerHTML = `
+                  <span>Loading...</span>`;
+                  const formData = new FormData(form_profile);
+
+                  if (update_profile == "") {
+                    const { data, error } = await supabase
+                      .from("user_information")
+                      .insert([
+                        {
+                          username: formData.get("username"),
+                          full_name: formData.get("full_name"),
+                          phone_number: formData.get("phone_number"),
+                          birthdate: formData.get("birthdate")
+                        },
+                      ])
+                      .select();
+                    if (error) {
+                      alert("Something wrong happened. Cannot add info.");
+                      console.log(error);
+                    } else {
+                      alert("Information Successfully Added!");
+                      window.location.reload();
+                    }
+                  
+                  
+                  
+                    // Reset Form
+                    form_profile.reset();
+                  
+                    // Enable Submit Button
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).disabled = false;
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).innerHTML = `Submit`;
+                  } else {
+                    const { data, error } = await supabase
+                      .from("user_information")
+                      .update({
+                        username: formData.get("username"),
+                        full_name: formData.get("full_name"),
+                        phone_number: formData.get("phone_number"),
+                        birthdate: formData.get("birthdate"),
+                      })
+                      .eq("id", update_profile)
+                      .select();
+                    if (error == null) {
+                      alert("Information Successfully Updated!");
+                      window.location.reload();
+                    } else {
+                      alert("Something wrong happened. Cannot update info.");
+                      console.log(error);
+                    }
+                  
+                    // Reset Form
+                    form_profile.reset();
+                  
+                    // Enable Submit Button
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).disabled = false;
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).innerHTML = `Submit`;
+                  }
+                  
+
+                  
+};
