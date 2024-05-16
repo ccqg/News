@@ -41,30 +41,26 @@ const form = async (e) => {
   } else {
     alert("Conversation Added!");
     /* window.location.reload(); */
-  
   }
 
   const { data: notes, error: notesError } = await supabase
-  .from("note")
-  .select("*")
-  .eq("user_id", userId) // Filter by user_id instead of id
-  .order("id", { ascending: false }) // Order by ID in descending order
-  .range(0, 1); // Get only the last record
+    .from("note")
+    .select("*")
+    .eq("user_id", userId) // Filter by user_id instead of id
+    .order("id", { ascending: false }) // Order by ID in descending order
+    .range(0, 1); // Get only the last record
 
-if (notesError) {
-  console.error(notesError);
-} else {
-  if (notes.length > 0) {
-   
-    localStorage.setItem("last_note_id", notes[0].id);
-    console.log("Last note ID:", notes[0].id);
-      window.location.href = "AI.html";
+  if (notesError) {
+    console.error(notesError);
   } else {
-    console.log("No notes found for user ID:", userId);
+    if (notes.length > 0) {
+      localStorage.setItem("last_note_id", notes[0].id);
+      console.log("Last note ID:", notes[0].id);
+      window.location.href = "AI.html";
+    } else {
+      console.log("No notes found for user ID:", userId);
+    }
   }
-}
-
-
 };
 
 async function getDatas(keyword = "") {
@@ -102,9 +98,11 @@ async function getDatas(keyword = "") {
       
       <div class="modal fade" tabindex="-1" id="form_modal_${datas.id}">
         <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-content" style="background-color: #12171e;">
+
             <div class="modal-header">
-              <h5 class="modal-title">Note History</h5>
+            <h5 class="modal-title" style="color: white;">Note History</h5>
+
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -122,47 +120,46 @@ async function getDatas(keyword = "") {
   document.getElementById("noteContainer").innerHTML = container;
 
   // Add event listeners to the "View" buttons to fetch and display note history
-  document.querySelectorAll('#btn_view').forEach(button => {
-    button.addEventListener('click', async function () {
-      const noteId = this.getAttribute('data-id');
+  document.querySelectorAll("#btn_view").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const noteId = this.getAttribute("data-id");
       const convoContainerId = `convo_${noteId}`;
       console.log("Note ID:", noteId);
       const { data: conversations, error } = await supabase
-        .from('conversation')
-        .select('*')
-        .eq('note_id', noteId);
+        .from("conversation")
+        .select("*")
+        .eq("note_id", noteId);
 
-        let convoContent ="";
+      let convoContent = "";
 
       conversations.forEach((conversation) => {
         convoContent += `
          
-            <div class="card-body">
-              <h6 class="card-title">User: ${conversation.prompt}</h6>
-              
-            </div>
-           
-          </div>
-          <div class="card mb-2">
-          <div class="card-body">
-          <h6 class="card-title">AI: ${conversation.response}</h6>
-          
+        <div class="card mb-2">
+        <div class="card-body">
+          <h6 class="card-title">User: ${conversation.prompt}</h6>
         </div>
+      </div>
+      
+      <div class="card mb-2">
+        <div class="card-body">
+          <h6 class="card-title">AI: ${conversation.response}</h6>
+        </div>
+      </div>
+      
         
         `;
-      })
+      });
 
       if (error) {
         console.error("Error fetching conversations:", error);
         return;
       }
 
-      
       document.getElementById(convoContainerId).innerHTML = convoContent;
     });
   });
 }
-
 
 document.body.addEventListener("click", function (event) {
   if (event.target.id === "btn_delete") {
