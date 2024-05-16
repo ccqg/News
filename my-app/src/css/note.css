@@ -292,3 +292,14 @@ main {
 body .main-content {
   background-color: #ffffff;
 }
+
+.mynotes {
+  /* Add your styles here */
+  padding-top: 5px;
+  padding-bottom: 7px;
+  font-size: 2rem;
+  background-color: #12171e;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+}

@@ -30,14 +30,10 @@
     <!-- End of Loader -->
     <div class="container">
       <div class="col- sm center">
-
-
         <a type="button" id="btn_logout" href="note.html">
           <i style="color: gray; font-size: 40px" class="bx bx-arrow-back"></i>
         </a>
         <div id="nameContainer"></div>
-
-
       </div>
       <div class="col-sm d-flex justify-content-center mt-3">
         <div id="userContainer"></div>
@@ -62,113 +58,113 @@
           </div>
         </div>
       </div>
-    <form id="form_profile">
-      <div class="row">
-        <div class="col-sm-12 col-lg-12 col-md-12">
-          <div class="input-group d-flex justify-content-center">
-            <div class="input-group-prepend">
-              <input
-                id="username"
-                name="username"
-                type="text"
-                class="form-control"
-                aria-label="Default"
-                placeholder="Username"
-              />
-            </div>
-
-            <div class="input-group-prepend mx-2">
-              <input
-                id="full_name"
-                name="full_name"
-                type="text"
-                class="form-control"
-                aria-label="Default"
-                placeholder="fullname"
-                aria-describedby="fullname"
-              />
-            </div>
-            <div class="input-group-prepend mx-2">
-              <input
-                id="phone_number"
-                name="phone_number"
-                type="text"
-                class="form-control"
-                aria-label="Default"
-                placeholder="Phone Number"
-                aria-describedby="phone"
-              />
-            </div>
-            <div class="input-group-prepend">
-              <input
-                name="birthdate"
-                id="birthdate"
-                type="date"
-                class="form-control"
-                aria-label="Default"
-                placeholder="Birthdate"
-                aria-describedby="birthdate"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="d-flex justify-content-center">
-          <button
-            id="btn_save"
-            type="button"
-            class="btn btn-secondary mb-5"
-            data-toggle="modal"
-            data-target="#exampleModalCenter"
-          >
-            Save Changes
-          </button>
-
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="exampleModalCenter"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">
-                    Modal title
-                  </h5>
-                  <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">...</div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
+      <form id="form_profile">
+        <div class="row">
+          <div class="col-sm-12 col-lg-12 col-md-12">
+            <div class="input-group d-flex justify-content-center">
+              <div class="input-group-prepend">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  class="form-control"
+                  aria-label="Default"
+                  placeholder="Username"
+                />
               </div>
-              <!-- Button trigger modal -->
-              <!-- Button trigger modal -->
+
+              <div class="input-group-prepend mx-2">
+                <input
+                  id="full_name"
+                  name="full_name"
+                  type="text"
+                  class="form-control"
+                  aria-label="Default"
+                  placeholder="Fullname"
+                  aria-describedby="fullname"
+                />
+              </div>
+              <div class="input-group-prepend mx-2">
+                <input
+                  id="phone_number"
+                  name="phone_number"
+                  type="text"
+                  class="form-control"
+                  aria-label="Default"
+                  placeholder="Phone Number"
+                  aria-describedby="phone"
+                />
+              </div>
+              <div class="input-group-prepend">
+                <input
+                  name="birthdate"
+                  id="birthdate"
+                  type="date"
+                  class="form-control"
+                  aria-label="Default"
+                  placeholder="Birthdate"
+                  aria-describedby="birthdate"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center">
+            <button
+              id="btn_save"
+              type="button"
+              class="btn btn-secondary mb-5"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+            >
+              Save Changes
+            </button>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="exampleModalCenter"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">
+                      Modal title
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">...</div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+                <!-- Button trigger modal -->
+                <!-- Button trigger modal -->
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
     </div>
     <script>
       var loader = document.getElementById("preloader");
