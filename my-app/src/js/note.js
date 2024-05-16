@@ -235,7 +235,7 @@ const deleteNote = async (e) => {
 
     // Delay reload by 3 seconds (3000 milliseconds)
     setTimeout(function () {
-      /*  window.location.reload(); */
+      window.location.reload();
     }, 1500);
   } catch (error) {
     errorNotification("Something wrong happened. Cannot delete item.", 15);
