@@ -148,7 +148,7 @@ async function getDatas(keyword = "") {
           <h6 class="card-title">AI: ${conversation.response}</h6>
           
         </div>
-        
+        <div>
         `;
       })
 
