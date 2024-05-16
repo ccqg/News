@@ -1,5 +1,11 @@
 import { supabase } from "./main";
 
+
+const itemsImageUrl =
+  "https://jdrbeyywzehkravlqofg.supabase.co/storage/v1/object/public/profile_picture/";
+
+const AIimage = "https://jdrbeyywzehkravlqofg.supabase.co/storage/v1/object/public/profile_picture/public/chatgpt-icon.png";
+  
 const messageBar = document.querySelector(".bar-wrapper input");
 const sendBtn = document.querySelector(".bar-wrapper button");
 const messageBox = document.querySelector(".message-box");
@@ -11,23 +17,37 @@ console.log(lastNoteId);
 let API_URL = "https://api.openai.com/v1/chat/completions";
 let API_KEY = "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";
 
+
 sendBtn.onclick = async function () {
+
+  let { data: profiles, error: userError } = await supabase
+  .from("user_information")
+  .select("*")
+  .eq("id", userId);
+
+  let message  = "";
+  let response = "";
+
+  
   if (messageBar.value.length > 0) {
     const UserTypedMessage = messageBar.value;
     messageBar.value = "";
 
     // Generate a unique ID for the user-typed message
     const userMessageId = 'user-message-' + Date.now();
-
-    let message = `<div id="${userMessageId}" class="chat message">
-      <img src="./assets/imgs/x1.jpg" />
+    profiles.forEach((data) => {
+      message = `<div id="${userMessageId}" class="chat message">
+      <img src="${itemsImageUrl + data.image_path}" />
       <span>${UserTypedMessage}</span>
     </div>`;
-
-    let response = `<div class="chat response">
-      <img src="./assets/icon/chatgpt-icon.png" />
+    response = `<div class="chat response">
+      <img src="${AIimage}" />
       <span class="new">...</span>
     </div>`;
+
+    })
+   
+  
 
     messageBox.insertAdjacentHTML("beforeend", message);
 
@@ -108,7 +128,7 @@ sendBtn.onclick = async function () {
         console.log(error);
       } else {
        
-        alert("Conversation Added!");
+        console.log("Conversation Added!");
       }
 
       const ChatBotResponse = document.querySelector(".response .new");
