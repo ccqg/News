@@ -17,7 +17,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 115vh;
+  height: 118vh;
   width: 80px;
   background-color: #12171e;
   padding: 0.4rem 0.8rem;
@@ -34,7 +34,7 @@
 
 .sidebar.active {
   width: 250px;
-  height: 120vh;
+  height: 180vh;
 }
 
 .sidebar #btn {
