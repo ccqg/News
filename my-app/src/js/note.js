@@ -39,8 +39,9 @@ const form = async (e) => {
   if (error) {
     console.log(error);
   } else {
-    alert("Note Added!");
-    window.location.reload();
+    alert("Conversation Added!");
+    /* window.location.reload(); */
+    window.location.href = "AI.html";
   }
 };
 
@@ -56,6 +57,7 @@ async function getDatas(keyword = "") {
     container += `<div class="mt-2"><div class=" card w-100">
     <div id="card_color" class="card-body rounded"  >
       <h5 class="card-title">${datas.title}</h5>
+      <hr>
       <p class="card-text">${datas.description}</p>
      
   <div class="row text-end">
