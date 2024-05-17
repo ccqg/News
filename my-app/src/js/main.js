@@ -21,7 +21,7 @@ async function doLogout() {
   let { error } = await supabase.auth.signOut();
 
   if (error == null) {
-    alert("Logout Successfully!");
+    alert("Logout successfully!");
 
     // Clear local Storage
     localStorage.clear();
