@@ -26,6 +26,12 @@ document
   .addEventListener("click", function (event) {
     // Prevent the default behavior of the anchor tag
     event.preventDefault();
+    const isConfirmed = window.confirm("Are you sure you want to logout?");
+
+    // Check if the user has confirmed the deletion
+    if (!isConfirmed) {
+      return; // Abort the operation if the user cancels
+    }
     doLogout();
   });
 getDatas();
@@ -42,58 +48,54 @@ const form = async (e) => {
   if (error) {
     console.log(error);
   } else {
-    alert("Conversation Added!");
+    alert("Conversation added!");
     /* window.location.reload(); */
-
-  
   }
 
   const { data: notes, error: notesError } = await supabase
-  .from("note")
-  .select("*")
-  .eq("user_id", userId) // Filter by user_id instead of id
-  .order("id", { ascending: false }) // Order by ID in descending order
-  .range(0, 1); // Get only the last record
+    .from("note")
+    .select("*")
+    .eq("user_id", userId) // Filter by user_id instead of id
+    .order("id", { ascending: false }) // Order by ID in descending order
+    .range(0, 1); // Get only the last record
 
-if (notesError) {
-  console.error(notesError);
-} else {
-  if (notes.length > 0) {
-   
-    localStorage.setItem("last_note_id", notes[0].id);
-    console.log("Last note ID:", notes[0].id);
-      window.location.href = "AI.html";
+  if (notesError) {
+    console.error(notesError);
   } else {
-    console.log("No notes found for user ID:", userId);
-
+    if (notes.length > 0) {
+      localStorage.setItem("last_note_id", notes[0].id);
+      console.log("Last note ID:", notes[0].id);
+      window.location.href = "AI.html";
+    } else {
+      console.log("No notes found for user ID:", userId);
+    }
   }
-}
-
-
 };
 
 getPicture();
 
 async function getPicture() {
-    let {data: profile_picture, error} = await supabase
+  let { data: profile_picture, error } = await supabase
     .from("user_information")
     .select("*")
-    .eq("id", userId)
+    .eq("id", userId);
 
-    if (error) {
-        console.error("Error fetching profile picture:", error);
-    }
+  if (error) {
+    console.error("Error fetching profile picture:", error);
+  }
 
-    let container = "";
+  let container = "";
 
-    profile_picture.forEach((profile) => {
-        container += `<div data-id="${profile.image_path}" ><img class="block my-2 border border-light border-2 rounded-circle"  src="${itemsImageUrl + profile.image_path}" alt="me"  /></div>`;
-    })
+  profile_picture.forEach((profile) => {
+    container += `<div data-id="${
+      profile.image_path
+    }" ><img class="user-img"  src="${
+      itemsImageUrl + profile.image_path
+    }" alt="me"  /></div>`;
+  });
 
-    document.getElementById("image_container").innerHTML = container;
-};
-
-
+  document.getElementById("image_container").innerHTML = container;
+}
 
 async function getDatas(keyword = "") {
   let { data: notes, error } = await supabase
@@ -155,18 +157,17 @@ async function getDatas(keyword = "") {
 
   // Add event listeners to the "View" buttons to fetch and display note history
 
-  document.querySelectorAll('#btn_view').forEach(button => {
-    button.addEventListener('click', async function () {
-      const noteId = this.getAttribute('data-id');
+  document.querySelectorAll("#btn_view").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const noteId = this.getAttribute("data-id");
       const convoContainerId = `convo_${noteId}`;
       console.log("Note ID:", noteId);
       const { data: conversations, error } = await supabase
-        .from('conversation')
-        .select('*')
-        .eq('note_id', noteId);
+        .from("conversation")
+        .select("*")
+        .eq("note_id", noteId);
 
-        let convoContent ="";
-
+      let convoContent = "";
 
       conversations.forEach((conversation) => {
         convoContent += `
@@ -188,18 +189,15 @@ async function getDatas(keyword = "") {
         `;
       });
 
-
       if (error) {
         console.error("Error fetching conversations:", error);
         return;
       }
 
-
       document.getElementById(convoContainerId).innerHTML = convoContent;
     });
   });
 }
-
 
 document.body.addEventListener("click", function (event) {
   if (event.target.id === "btn_delete") {
