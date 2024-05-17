@@ -48,7 +48,7 @@ change_image.onsubmit = async (e) => {
     // Error notification for upload
     if (error) {
       console.log(
-        "Something wrong happened, cannot upload image. Image size might be too big, you may update the item's image."
+        "Something wrong happened. Cannot upload image, image size might be too big. You may update the item's image."
       );
       console.log(error);
     }
@@ -69,7 +69,7 @@ change_image.onsubmit = async (e) => {
       console.log("Something wrong happened. Cannot add picture.");
       console.log(error);
     } else {
-      alert("Picture successfully added.");
+      alert("picture Successfully Added!");
 
       /* window.location.reload(); */
     }
@@ -83,23 +83,26 @@ change_image.onsubmit = async (e) => {
       .select();
 
     if (error == null) {
-      alert("Profile picture updated.");
+      alert("Profile Picture Updated Successfully!");
 
       // Reset storage id
       for_update_id = "";
       /* reload datas */
       getPicture();
     } else {
-      alert("Something wrong happened, cannot add picture.");
+      alert("Something wrong happened. Cannot add picture.");
       console.log(error);
     }
+     
   }
 
   // Modal Close
   /* document.getElementById("modal_close").click(); */
 
   // Reset Form
-  change_image.reset();
+
+
+
 
   // Enable Submit Button
 };
@@ -112,7 +115,7 @@ async function getName() {
       .select("*")
       .eq("id", userId);
 
-    console.log(userId);
+      console.log(userId);
 
     //ge declare ug empty para makahimo ug dynamic nga output
 
@@ -136,40 +139,60 @@ async function getName() {
 
 async function getPicture() {
   try {
+    document.querySelector(
+      "#change_image button[type='submit']"
+    ).disabled = true;
+    document.querySelector(
+      "#change_image button[type='submit']"
+    ).innerHTML = `<span>Loading...</span>`;
+    
     // Fetch user information
     let { data: profiles, error: userError } = await supabase
       .from("user_information")
       .select("*")
       .eq("id", userId);
 
-    //ge declare ug empty para makahimo ug dynamic nga output
-
+    // Declare an empty string to dynamically generate output
     let container = "";
 
     profiles.forEach((user_info) => {
-      //Dynamic Navbar para mag baylo2 base sa ga log-in na user
+      // Dynamic content for user image
       container += `
-        <div class="d-flex justify-content-center" >
-        <!-- connector to javaS image -->
-        <div
-          class = "mb-5"
-          style="width: 200px; height: 180px;"
-          id="imageContainer" 
-        ><div data-id="${
-          user_info.image_path
-        }"><img class="block my-2 border border-light border-2 rounded-circle" src="${
-        itemsImageUrl + user_info.image_path
-      }" width="100%" height="200rem"></div></div>
-      </div>
-      <div>
-          `;
+        <div class="d-flex justify-content-center">
+          <div 
+            class="mb-5"
+            style="width: 200px; height: 180px;"
+            id="imageContainer"
+          >
+            <div data-id="${user_info.image_path}">
+              <img 
+                class="block my-2 border border-light border-2 rounded-circle" 
+                src="${itemsImageUrl + user_info.image_path}" 
+                width="100%" 
+                height="200rem"
+              >
+            </div>
+          </div>
+        </div>`;
     });
 
+    // Inject generated content into the DOM
     document.getElementById("userContainer").innerHTML = container;
+    
   } catch (error) {
-    console(error.message);
+    console.error(error.message); // Corrected from console to console.error
   }
+  
+  // Reset form and re-enable submit button
+  change_image.reset();
+  document.querySelector(
+    "#change_image button[type='submit']"
+  ).disabled = false;
+  document.querySelector(
+    "#change_image button[type='submit']"
+  ).innerHTML = `Submit`;
 }
+
 let update_profile = "";
 async function viewEdit() {
   // Supabase show by id
@@ -191,7 +214,7 @@ async function viewEdit() {
 
     // Change Button Text using textContent; either innerHTML or textContent is fine here
   } else {
-    errorNotification("Something wrong happened, cannot show item.", 15);
+    errorNotification("Something wrong happened. Cannot show item.", 15);
     console.log(error);
   }
 }
@@ -200,75 +223,86 @@ async function viewEdit() {
 // initialize ug container
 document.body.addEventListener("click", function (event) {
   if (event.target.id === "btn_save") {
-    onSubmitHandler(event);
+   onSubmitHandler(event);
   }
 });
 
+
+
 const onSubmitHandler = async (e) => {
   e.preventDefault();
-  document.querySelector("#form_profile button[type='button']").disabled = true;
-  document.querySelector("#form_profile button[type='button']").innerHTML = `
+  document.querySelector(
+    "#form_profile button[type='button']"
+  ).disabled = true;
+  document.querySelector(
+    "#form_profile button[type='button']"
+  ).innerHTML = `
                   <span>Loading...</span>`;
-  const formData = new FormData(form_profile);
+                  const formData = new FormData(form_profile);
 
-  if (update_profile == "") {
-    const { data, error } = await supabase
-      .from("user_information")
-      .insert([
-        {
-          username: formData.get("username"),
-          full_name: formData.get("full_name"),
-          phone_number: formData.get("phone_number"),
-          birthdate: formData.get("birthdate"),
-        },
-      ])
-      .select();
-    if (error) {
-      alert("Something wrong happened, cannot add info.");
-      console.log(error);
-    } else {
-      alert("Information successfully added!");
-      window.location.reload();
-    }
+                  if (update_profile == "") {
+                    const { data, error } = await supabase
+                      .from("user_information")
+                      .insert([
+                        {
+                          username: formData.get("username"),
+                          full_name: formData.get("full_name"),
+                          phone_number: formData.get("phone_number"),
+                          birthdate: formData.get("birthdate")
+                        },
+                      ])
+                      .select();
+                    if (error) {
+                      alert("Something wrong happened. Cannot add info.");
+                      console.log(error);
+                    } else {
+                      alert("Information Successfully Added!");
+                      window.location.reload();
+                    }
+                  
+                  
+                  
+                    // Reset Form
+                    form_profile.reset();
+                  
+                    // Enable Submit Button
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).disabled = false;
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).innerHTML = `Submit`;
+                  } else {
+                    const { data, error } = await supabase
+                      .from("user_information")
+                      .update({
+                        username: formData.get("username"),
+                        full_name: formData.get("full_name"),
+                        phone_number: formData.get("phone_number"),
+                        birthdate: formData.get("birthdate"),
+                      })
+                      .eq("id", update_profile)
+                      .select();
+                    if (error == null) {
+                      alert("Information Successfully Updated!");
+                      window.location.reload();
+                    } else {
+                      alert("Something wrong happened. Cannot update info.");
+                      console.log(error);
+                    }
+                  
+                    // Reset Form
+                    form_profile.reset();
+                  
+                    // Enable Submit Button
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).disabled = false;
+                    document.querySelector(
+                      "#form_profile button[type='button']"
+                    ).innerHTML = `Submit`;
+                  }
+                  
 
-    // Reset Form
-    form_profile.reset();
-
-    // Enable Submit Button
-    document.querySelector(
-      "#form_profile button[type='button']"
-    ).disabled = false;
-    document.querySelector(
-      "#form_profile button[type='button']"
-    ).innerHTML = `Submit`;
-  } else {
-    const { data, error } = await supabase
-      .from("user_information")
-      .update({
-        username: formData.get("username"),
-        full_name: formData.get("full_name"),
-        phone_number: formData.get("phone_number"),
-        birthdate: formData.get("birthdate"),
-      })
-      .eq("id", update_profile)
-      .select();
-    if (error == null) {
-      alert("Information successfully updated.");
-      window.location.reload();
-    } else {
-      alert("Something wrong happened, cannot update info.");
-      console.log(error);
-    }
-
-    // Reset Form
-    form_profile.reset();
-
-    // Enable Submit Button
-    document.querySelector(
-      "#form_profile button[type='button']"
-    ).disabled = false;
-    document.querySelector(
-      "#form_profile button[type='button']"
-    ).innerHTML = `Submit`;
-  }
+                  
 };
